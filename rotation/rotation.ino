@@ -8,7 +8,7 @@ volatile double rpm = 0;
 volatile unsigned int tmr2_f = 0;
 
 //スリット数
-volatile unsigned int slit_num = 0;
+volatile unsigned int slit_num = 36;
 
 //校正用の時速
 //volatile double sp = 0;
@@ -31,14 +31,14 @@ void setup() {
   pinMode(2, INPUT);
   Serial.println("RMP");
   attachInterrupt(0, int_cnt, RISING);
-  MsTimer2::set(250, int_tmr2);
+  MsTimer2::set(500, int_tmr2);
   MsTimer2::start();
 }
 
 void loop() {
   if (tmr2_f == 1) {
     tmr2_f = 0;
-    rpm = cnt_t * 4 * 60 / slit_num;
+    rpm = cnt_t * 2 * 60 / slit_num;
     Serial.print("cnt_t = ");
     Serial.print(cnt_t);
     Serial.print("  RPM = ");
